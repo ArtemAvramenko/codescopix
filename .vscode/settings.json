@@ -1,0 +1,29 @@
+{
+    "editor.detectIndentation": false,
+    "javascript.preferences.importModuleSpecifier": "relative",
+    "html.format.wrapAttributes": "preserve-aligned",
+    "files.exclude": {
+        "node_modules": true,
+        "legacy-build": true,
+        "architecture": true,
+        "build": true,
+        "build-tools": true,
+        "dist": true,
+        "data": true,
+        "nsis": true,
+        "renderer/.angular": true
+    },
+    "editor.rulers": [
+        120
+    ],
+    "editor.formatOnSave": true,
+    "terminal.integrated.profiles.osx": {
+        "zsh": {
+            "path": "zsh",
+            "args": [
+                "-i"
+            ]
+        }
+    },
+    "terminal.integrated.defaultProfile.osx": "zsh"
+}
