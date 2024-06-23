@@ -1,10 +1,10 @@
-module.exports = function (/** @type {string} */ filePath) {
+import fs from 'fs';
+import parser from 'xml2json';
+import rleDecode from './rle-decode.js';
 
-    const fs = require('fs');
-    const parser = require('xml2json');
+export default function (/** @type {string} */ filePath) {
 
     const xml = fs.readFileSync(filePath);
-    const rleDecode = require('./rle-decode.js')
 
     const /** @type {{u:string,x:string,y:string,w:string,d:string}[]} */ data =
         parser.toJson(xml, { object: true }).kbits.g;
@@ -13,6 +13,6 @@ module.exports = function (/** @type {string} */ filePath) {
         code: parseInt(u),
         x: parseInt(x),
         y: parseInt(y),
-        data: rleDecode(d)
+        rows: rleDecode(d)
     }));
 }

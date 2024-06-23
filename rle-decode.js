@@ -1,4 +1,4 @@
-module.exports = function (/** @type {string} */ base64) {
+export default function (/** @type {string} */ base64) {
 
     let /** @type {number} */ repeatData = null;
     let repeatCount = 0;
