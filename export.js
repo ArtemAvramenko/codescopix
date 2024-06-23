@@ -103,5 +103,3 @@ writeFileSync('./Example.png', getImage([
     'Жебракують філософи при ґанку церкви в Гадячі, ще й шатро їхнє п\'яне знаємо '
 ]));
 writeFileSync('./Codescopix.txt', getAsciiImage());
-
-console.log(getTableText());
