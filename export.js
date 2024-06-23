@@ -73,8 +73,11 @@ function getImage(/** @type {string[]} */ textLines) {
     for (let y = 0; y < textLines.length; y++) {
         let row = textLines[y];
         for (let x = 0; x < row.length; x++) {
+            if ([...row[x].normalize('NFD')].some(ch => !bitmapByChar[ch])) {
+                continue;
+            }
             let isDiacritics = false;
-            const chars = row[x].normalize('NFD');
+            const chars = bitmapByChar[row[x]] ? row[x] : row[x].normalize('NFD');
             for (let ch of chars) {
                 const chImg = bitmapByChar[ch];
                 if (chImg) {
@@ -96,7 +99,15 @@ writeFileSync('./Example.png', getImage([
     'The quick brown fox jumps over the lazy dog',
     '"Üb jodeln, Gör!", quäkt Schwyz',
     'Pijamalı hasta yağız şoföire çabucak güvendi',
-    //TODO: 'óśćźńýúíáéčřšžňěďť  żąłęů',
+    'ŔÁÂĂÄĹĆÇČÉĘËĚÍÎĎĐŃŇÓÔŐÖ×ŘŮÚŰÜÝŢß',
+    'ŕáâăäĺćçčéęëěíîďđńňóôőö÷řůúűüýţ',
+    'ЂЃѓЉЊЌЋЏђљњќћџЎўЈҐЁЄЇІіґё№єјЅѕї',
+    // TODO:
+    // '€AC‚„E…†‡‰Š‹ŚŤŽDŹ.‘’“”•–—™š›śBťžźˇ˘',
+    // 'Ł¤Ą¦§¨©Ş«¬­®Ż°±˛ł´µ¶·¸ąşF»Ľ˝ľż',
+    // '˙ƒˆŒ˜œŸ¡¢£¥ª¯º¼½¾¿ÀÃÅÆÈÊÌÏ',
+    // 'ÐÑÒÕØÙÛÞàãåæèêìï',
+    // 'ðñòõøùûþÿĞİğı',
     'Съешь же ещё этих мягких французских булок, да выпей чаю',
     'Вкъщи не яж сьомга с фиде без ракийка и хапка люта чушчица!',
     'У рудога вераб\'я ў сховішчы пад фатэлем ляжаць нейкія гаючыя зёлкі',
