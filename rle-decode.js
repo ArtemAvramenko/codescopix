@@ -5,25 +5,24 @@ export default function (/** @type {string} */ base64) {
     let buf = atob(base64);
     let bufIndex = 0;
 
-    function readByte() {
+    function rawRead() {
         if (bufIndex >= buf.length) {
             return -1;
         }
         return buf.charCodeAt(bufIndex++);
     }
 
-
     function read() {
         while (true) {
             if (repeatCount > 0) {
                 repeatCount--;
                 if (repeatData == null) {
-                    return readByte();
+                    return rawRead();
                 } else {
                     return repeatData;
                 }
             }
-            let data = readByte();
+            let data = rawRead();
             if (data < 0) {
                 return data;
             }
@@ -39,7 +38,7 @@ export default function (/** @type {string} */ base64) {
                     repeatData = 0xFF;
                     break;
                 case 0x80:
-                    data = readByte();
+                    data = rawRead();
                     if (data < 0) {
                         return data;
                     }
@@ -52,8 +51,8 @@ export default function (/** @type {string} */ base64) {
         }
     }
 
-    readByte();
-    const width = readByte();
+    rawRead();
+    const width = rawRead();
     let /** @type {boolean[][]} */ res = [[]];
     let b = read();
     while (b >= 0) {
@@ -62,8 +61,8 @@ export default function (/** @type {string} */ base64) {
             row = [];
             res.push(row)
         }
-        row.push(b > 128);
+        row.push(b >= 128);
         b = read();
     }
-    return res;
+    return res;// No ambiguity in the characters 'Il1', 'OoОо0', 'EeЕе', etc.
 }

@@ -8,6 +8,7 @@
 <prop id="lineGap" value="2"/>
 <prop id="xHeight" value="15"/>
 <prop id="capHeight" value="11"/>
+<name id="0" value="Copyright (c) 2024, Artem Avramenko"/>
 <name id="1" value="Codescopix"/>
 <name id="2" value="Regular"/>
 <name id="3" value="Codescopix-2024-01"/>
@@ -16,8 +17,11 @@
 <name id="6" value="Codescopix"/>
 <name id="8" value="Made with Bits&#39;n&#39;Picas by Kreative Software"/>
 <name id="11" value="http://www.kreativekorp.com/software/bitsnpicas/"/>
+<name id="13" value="Open Font License (OFL) v1.1"/>
+<name id="14" value="https://raw.githubusercontent.com/ArtemAvramenko/codescopix/main/LICENSE.txt"/>
 <name id="16" value="Codescopix"/>
 <name id="18" value="Codescopix"/>
+<name id="19" value="No ambiguity in the characters &#39;Il1&#39;, &#39;Oo&#1054;&#1086;0&#39;, &#39;Ee&#1045;&#1077;&#39;, etc."/>
 <g u="32" x="0" y="0" w="8" d="AAA"/>
 <g u="33" x="4" y="11" w="8" d="CwFIAUI"/>
 <g u="34" x="1" y="12" w="8" d="BAZCAkQCRAJEAkI"/>
@@ -228,5 +232,6 @@
 <g u="1119" x="1" y="8" w="8" d="CgdBBUIFQgVCBUIFQgVCBUgDQQZBAw"/>
 <g u="1168" x="1" y="13" w="8" d="DQcGQQZIwgD/BkEGQQZBBkEGQQZBBkEGQQZBBQ"/>
 <g u="1169" x="1" y="10" w="8" d="CgcGQQZIwgD/BkEGQQZBBkEGQQZBBQ"/>
+<g u="7838" x="1" y="12" w="8" d="DAcCQgRBAkECQQTD/wD/A0ECQQJBA0EDQQJBBMP/AP8FQgVCBULCAP8Cw/8A/wKC9QI"/>
 <g u="8470" x="1" y="11" w="8" d="CwdBAsX/AP8A/wJCAUICQgFDxQD/AP8AQsIA/wPC/wBCAUMBQgNBAkEDQQJBA0ECQQNBAkED"/>
 </kbits>
