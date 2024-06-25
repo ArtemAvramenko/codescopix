@@ -99,9 +99,14 @@ writeFileSync('./Example.png', getImage([
     'The quick brown fox jumps over the lazy dog',
     '"Üb jodeln, Gör!", quäkt Schwyz',
     'Pijamalı hasta yağız şoföire çabucak güvendi',
-    'ŔÁÂĂÄĹĆÇČÉĘËĚÍÎĎĐŃŇÓÔŐÖ×ŘŮÚŰÜÝŢẞ',
-    'ŕáâăäĺćçčéęëěíîďđńňóôőö÷řůúűüýţß',
-    'ЂЃѓЉЊЌЋЏђљњќћџЎўЈҐЁЄЇІіґё№єјЅѕї',
+    'El veloz murciélago hindú comía feliz cardillo y kiwi.',
+    'La cigüeña tocaba el saxofón detrás del palenque de paja.',
+    "Voix ambiguë d'un cœur qui au zéphyr préfère les jattes de kiwis.",
+    "Árvíztűrő tükörfúrógép",
+    'ŔÁÂĂÄĹĆÇČÉĘËĚÍÎĎĐŃŇÓÔŐÖŘŮÚŰÜÝŢẞ',
+    'ŕáâăäĺćçčéęëěíîďđńňóôőöřůúűüýţß',
+    'ЂЃѓЉЊЌЋЏђљњќћџЎўЈҐЁЄЇІіґёєјЅѕї',
+    '×÷№',
     'ÑÒÕÀÃÅÈÊÌÏÙÛĞİŸŚŤŽŹĽŻŠĄŞŁ',
     'ñòõàãåèêìïùûğıÿśťžźľżšąşł',
     // TODO:
@@ -113,7 +118,7 @@ writeFileSync('./Example.png', getImage([
     "No ambiguity in the characters 'Il1', 'OoОо0', 'CcСс', etc.",
     'Съешь же ещё этих мягких французских булок, да выпей чаю',
     'Вкъщи не яж сьомга с фиде без ракийка и хапка люта чушчица!',
-    'У рудога вераб\'я ў сховішчы пад фатэлем ляжаць нейкія гаючыя зёлкі',
-    'Жебракують філософи при ґанку церкви в Гадячі, ще й шатро їхнє п\'яне знаємо '
+    'У рудога вераб’я ў сховішчы пад фатэлем ляжаць нейкія гаючыя зёлкі',
+    'Жебракують філософи при ґанку церкви в Гадячі, ще й шатро їхнє п’яне знаємо.'
 ]));
 writeFileSync('./Codescopix.txt', getAsciiImage());
