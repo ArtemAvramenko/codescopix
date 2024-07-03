@@ -101,8 +101,8 @@ writeFileSync('./Example.png', getImage([
     'Pijamalı hasta yağız şoföire çabucak güvendi',
     'El veloz murciélago hindú comía feliz cardillo y kiwi.',
     'La cigüeña tocaba el saxofón detrás del palenque de paja.',
-    "Voix ambiguë d'un cœur qui au zéphyr préfère les jattes de kiwis.",
-    "Árvíztűrő tükörfúrógép",
+    'Voix ambiguë d’un cœur qui au zéphyr préfère les jattes de kiwis.',
+    'Árvíztűrő tükörfúrógép',
     'ŔÁÂĂÄĹĆÇČÉĘËĚÍÎĎĐŃŇÓÔŐÖŘŮÚŰÜÝŢẞ',
     'ŕáâăäĺćçčéęëěíîďđńňóôőöřůúűüýţß',
     'ЂЃѓЉЊЌЋЏђљњќћџЎўЈҐЁЄЇІіґёєјЅѕї',
@@ -110,14 +110,15 @@ writeFileSync('./Example.png', getImage([
     'ÑÒÕÀÃÅÈÊÌÏÙÛĞİŸŚŤŽŹĽŻŠĄŞŁŒÆ',
     'ñòõàãåèêìïùûğıÿśťžźľżšąşłœæ',
     '«French», ‹French›, “English”, ‘English’, „German“, ‚German‘',
+    'Cop Сор, Box Вох, Check Сплеск, Cocoa Сосна,',
+    '⌃⇧⌥⌘⊞ ⇦⇧⇨⇩⌃⌄',
     // TODO:
     // ʼ ´ ˝  –—  
-    // ⇧⌥⌃⌘
     // '…†‡‰.•™ˇ˘',
     // '¦§¨¬­®°±˛¶·¸',
     // '˙ƒˆ˜ª¯º¼½¾',
     // 'ÐØÞ ðøþ',
-    "No ambiguity in the characters 'Il1', 'OoОо0', 'CcСс', etc.",
+    'No ambiguity in the characters ‘Il1’, ‘OoОо0’, ‘CcСс’, etc.',
     'Съешь же ещё этих мягких французских булок, да выпей чаю',
     'Вкъщи не яж сьомга с фиде без ракийка и хапка люта чушчица!',
     'У рудога вераб’я ў сховішчы пад фатэлем ляжаць нейкія гаючыя зёлкі',

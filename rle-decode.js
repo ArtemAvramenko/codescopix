@@ -64,5 +64,5 @@ export default function (/** @type {string} */ base64) {
         row.push(b >= 128);
         b = read();
     }
-    return res;// No ambiguity in the characters 'Il1', 'OoОо0', 'EeЕе', etc.
+    return res;
 }
