@@ -4,8 +4,10 @@ import Jimp from 'jimp';
 
 const chWidth = 8;
 const chHeight = 19;
+const chCapsHeight = 11;
 
 const chars = kbitxParse('./Codescopix.kbitx');
+const infoByCharCode = Object.fromEntries(chars.map(ch => [ch.code, ch]));
 
 function getImagesByChar() {
     let /** @type {{[ch: string]: Jimp}} */ res = {};
@@ -78,14 +80,15 @@ function getImage(/** @type {string[]} */ textLines) {
             }
             let isDiacritics = false;
             const chars = bitmapByChar[row[x]] ? row[x] : row[x].normalize('NFD');
+            let offset = 0;
             for (let ch of chars) {
                 const chImg = bitmapByChar[ch];
                 if (chImg) {
-                    let offset = 0;
-                    if (isDiacritics && '\u0327'.indexOf(ch) < 0 && chars[0] !== chars[0].toUpperCase()) {
-                        offset = 2;
+                    const charY = infoByCharCode[ch.charCodeAt(0)].y;
+                    img.blit(chImg, x * chWidth, y * chHeight + (isDiacritics && charY > 0 ? offset : 0));
+                    if (!isDiacritics) {
+                        offset = Math.max(0, chCapsHeight - charY - 1);
                     }
-                    img.blit(chImg, x * chWidth, y * chHeight + offset);
                 }
                 isDiacritics = true;
             }
@@ -107,8 +110,8 @@ writeFileSync('./Example.png', getImage([
     'ŕáâăäĺćçčéęëěíîďđńňóôőöřůúűüýţß',
     'ЂЃѓЉЊЌЋЏђљњќћџЎўЈҐЁЄЇІіґёєјЅѕї',
     '×÷№µ©€¢£¥¤ ¿A? ¡B!',
-    'ÑÒÕÀÃÅÈÊÌÏÙÛĞİŸŚŤŽŹĽŻŠĄŞŁŒÆ',
-    'ñòõàãåèêìïùûğıÿśťžźľżšąşłœæ',
+    'ÑÒÕÀÃÅÈÊÌÏÙÛĞİŸŚŤŽŹĽŻŠĄŞŁŒÆÐØÞ',
+    'ñòõàãåèêìïùûğıÿśťžźľżšąşłœæðøþ',
     '«French», ‹French›, “English”, ‘English’, „German“, ‚German‘',
     'Cop Сор, Box Вох, Check Сплеск, Cocoa Сосна,',
     '⌃⇧⌥⌘⊞ ⇦⇧⇨⇩⌃⌄',
@@ -117,7 +120,6 @@ writeFileSync('./Example.png', getImage([
     // '…†‡‰.•™ˇ˘',
     // '¦§¨¬­®°±˛¶·¸',
     // '˙ƒˆ˜ª¯º¼½¾',
-    // 'ÐØÞ ðøþ',
     'No ambiguity in the characters ‘Il1’, ‘OoОо0’, ‘CcСс’, etc.',
     'Съешь же ещё этих мягких французских булок, да выпей чаю',
     'Вкъщи не яж сьомга с фиде без ракийка и хапка люта чушчица!',
