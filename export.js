@@ -75,11 +75,12 @@ function getImage(/** @type {string[]} */ textLines) {
     for (let y = 0; y < textLines.length; y++) {
         let row = textLines[y];
         for (let x = 0; x < row.length; x++) {
-            if ([...row[x].normalize('NFD')].some(ch => !bitmapByChar[ch])) {
+            let normalizedChars = row[x].normalize('NFD');
+            if (normalizedChars.length > 1 && [...normalizedChars].some(ch => !bitmapByChar[ch])) {
                 continue;
             }
             let isDiacritics = false;
-            const chars = bitmapByChar[row[x]] ? row[x] : row[x].normalize('NFD');
+            const chars = bitmapByChar[row[x]] ? row[x] : normalizedChars;
             let offset = 0;
             for (let ch of chars) {
                 const chImg = bitmapByChar[ch];
@@ -99,6 +100,23 @@ function getImage(/** @type {string[]} */ textLines) {
 
 writeFileSync('./Codescopix.png', getImage(getTableText()));
 writeFileSync('./Example.png', getImage([
+    'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz',
+    '!\"#$%&\'()*+,-./0123456789:;<=>?@[\\]^_`{|}~\u007f',
+    '‰¡¢£¤¥¦§¨©ª«¬\u00AD®¯°±²³´µ¶·¸¹º»¼½¾¿',
+    'ÀàÁáÂâÃãÄäÅåÆæÇçÈèÉéÊêËëÌìÍíÎîÏïÐðÑñÒòÓóÔôÕõÖö×÷ØøÙùÚúÛûÜüÝýÞþßÿĀāĂă',
+    'ĄąĆćČčĎďĐđĒēĖėĘęĚěĞğĢģĪīĮįİıĶķĹĺĻļĽľŁłŃńŅņŇňŌōŐőŒœŔŕŖŗŘřŚśŞşŠšŢţŤťŪūŮůŰűŲųŸŹźŻżŽž',
+    // TODO:
+    // 'ƠơƯư ˆˇ˘˙˚˛˜˝̣̀́̃̉΄΅·',
+    //'ΆΈΉΊΌΎΏΐΑΒΓΔΕΖΗΘΙΚΛΜΝΞΟΠΡΣΤΥΦΧΨΩΪΫάέήίΰαβγδεζηθικλμνξοπρςστυφχψωϊϋόύώ',
+    //'∫≈≠≤≥◊
+    'АаБбВвГгДдЕеЖжЗзИиЙйКкЛлМмНнОоПпРрСсТтУуФфХхЦцЧчШшЩщЪъЫыЬьЭэЮюЯя',
+    'ЁёЂђҐґЃѓЄєЅѕІіЇїЈјЉљЊњЋћЌќЎўЏџӘәҖҗҢңӨөҮүҺһ',
+    '–—―‘’‚“”„†‡•…‰‹›⁄₫€№™Ω∂∆∏∑√∞∫≈≠≤≥◊ﬁﬂ',
+    '"Neutral", \'Neutral\', «French», ‹French›, “English”, ‘English’, „German“, ‚German‘',
+    '―――― Em—Dash, En–Dash, z=10-x+y*2, hy‐phen‐ate, мʼята, ´acute, ˝double, ƒ′, ƒ″, ƒ‴',
+    '⇧⌥⌘⊞ ⇦⇧⇨⇩⌃⌄ ¼, ½, ¾″ ÔÖŌÕ ŮÚŰÙ ŠŞŻŽŹ',
+    'No ambiguity in the characters ‘Il1’, ‘OoОо0’, ‘CcСс’, ‘EeЕе’, etc.:',
+    'Cop Сор, Box Вох, Check Сплеск, Cocoa Сосна',
     'The quick brown fox jumps over the lazy dog',
     '"Üb jodeln, Gör!", quäkt Schwyz',
     'Pijamalı hasta yağız şoföire çabucak güvendi',
@@ -106,21 +124,6 @@ writeFileSync('./Example.png', getImage([
     'La cigüeña tocaba el saxofón detrás del palenque de paja.',
     'Voix ambiguë d’un cœur qui au zéphyr préfère les jattes de kiwis.',
     'Árvíztűrő tükörfúrógép',
-    '¡¢£¤¥¦§¨©ª«¬­®¯°±²³´µ¶·¸¹º»¼½¾¿',
-    'ÀàÁáÂâÃãÄäÅåÆæÇçÈèÉéÊêËëÌìÍíÎîÏïÐðÑñÒòÓóÔôÕõÖö×÷ØøÙùÚúÛûÜüÝýÞþßÿĀāĂă',
-    'ĄąĆćČčĎďĐđĒēĖėĘęĚěĞğĢģĪīĮįİıĶķĹĺĻļĽľŁłŃńŅņŇňŌōŐőŒœŔŕŖŗŘřŚśŞşŠšŢţŤťŪūŮůŰűŲųŸŹźŻżŽž',
-    // TODO:
-    // 'ƒƠơƯư ˆˇ˘˙˚˛˜˝̣̀́̃̉΄΅·',
-    //'Ά·ΈΉΊΌΎΏΐΑΒΓΔΕΖΗΘΙΚΛΜΝΞΟΠΡΣΤΥΦΧΨΩΪΫάέήίΰαβγδεζηθικλμνξοπρςστυφχψωϊϋόύώ',
-    //'¦§¨ª¬¯°±²³¶·¸¹º†‡•‰⁄₫Ω∂∆∏∑√∞∫≈≠≤≥◊ﬁﬂӘәҖҗҢңӨөҮүҺһ',
-    'ЁЂЃЄЅІЇЈЉЊЋЌЎЏАБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯҐ',
-    'абвгдежзийклмнопрстуфхцчшщъыьэюяёђѓєѕіїјљњћќўџґ',
-    '–—―‘’‚“”„†‡•…‰‹›⁄₫€№™Ω∂∆∏∑√∞∫≈≠≤≥◊ﬁﬂ',
-    '"Neutral", \'Neutral\', «French», ‹French›, “English”, ‘English’, „German“, ‚German‘',
-    '―――― Em—Dash, En–Dash, z=10-x+y*2, hy‐phen‐ate, мʼята, ´acute, ˝double, ƒ′, ƒ″, ƒ‴',
-    '⇧⌥⌘⊞ ⇦⇧⇨⇩⌃⌄ ¼, ½, ¾″ ÔÖŌÕ ŮÚŰÙ ŠŞŻŽŹ',
-    'No ambiguity in the characters ‘Il1’, ‘OoОо0’, ‘CcСс’, ‘EeЕе’, etc.:',
-    'Cop Сор, Box Вох, Check Сплеск, Cocoa Сосна',
     'Съешь же ещё этих мягких французских булок, да выпей чаю',
     'Вкъщи не яж сьомга с фиде без ракийка и хапка люта чушчица!',
     'У рудога вераб’я ў сховішчы пад фатэлем ляжаць нейкія гаючыя зёлкі',
