@@ -52,19 +52,28 @@ function getAsciiImage() {
 function getTableText() {
     let latestGroup = '';
     let latestPos = 0;
-    let res = ['Code ' + [...Array(16).keys()].map(n => toHex(n, 1)).join(' ') + ' '];
+    const colHeader = 'Code ' + [...Array(16).keys()].map(n => toHex(n, 1)).join(' ') + ' ';
+    const col1 = [colHeader];
+    const col2 = [colHeader];
     for (let char of chars) {
-        let group = toHex((char.code & 0xFFF0) >> 4, 3);
+        let group = toHex(char.code >> 4, 3);
+        const col = group < '100' ? col1 : col2;
         if (group != latestGroup) {
             latestGroup = group;
             latestPos = 0;
-            res.push(group + 'x');
+            col.push(group + 'x');
         }
         const pos = char.code & 0xF;
-        res[res.length - 1] += ' '.repeat(2 * (pos - latestPos));
+        col[col.length - 1] += ' '.repeat(2 * (pos - latestPos));
         latestPos = pos + 1;
         const ch = String.fromCharCode(char.code);
-        res[res.length - 1] += ' ' + ch;
+        col[col.length - 1] += ' ' + ch;
+    }
+    const res = [];
+    for (let i = 0; i < Math.max(col1.length, col2.length); i++) {
+        const s1 = col1[i] || '';
+        const s2 = col2[i] || '';
+        res.push(s1 + ' '.repeat(40 - s1.length) + s2);
     }
     return res;
 }
@@ -89,6 +98,8 @@ function getImage(/** @type {string[]} */ textLines) {
                     img.blit(chImg, x * chWidth, y * chHeight + (isDiacritics && charY > 0 ? offset : 0));
                     if (!isDiacritics) {
                         offset = Math.max(0, chCapsHeight - charY - 1);
+                    } else {
+                        offset -= 4; // second diacritics
                     }
                 }
                 isDiacritics = true;
@@ -105,17 +116,18 @@ writeFileSync('./Example.png', getImage([
     '‰¡¢£¤¥¦§¨©ª«¬\u00AD®¯°±²³´µ¶·¸¹º»¼½¾¿',
     'ÀàÁáÂâÃãÄäÅåÆæÇçÈèÉéÊêËëÌìÍíÎîÏïÐðÑñÒòÓóÔôÕõÖö×÷ØøÙùÚúÛûÜüÝýÞþßÿĀāĂăƠơƯư',
     'ĄąĆćČčĎďĐđĒēĖėĘęĚěĞğĢģĪīĮįİıĶķĹĺĻļĽľŁłŃńŅņŇňŌōŐőŒœŔŕŖŗŘřŚśŞşŠšŢţŤťŪūŮůŰűŲųŸŹźŻżŽž',
-    // TODO: Windows Glyph List 4 (WGL4)
+    // TODO: Windows Glyph List 4 (WGL4), World Glyph Set (W1G)
     //'ΑαΒβΓγΔδΕεΖζΗηΘθΙιΚκΛλΜμΝνΞξΟοΠπΡρΣσςΤτΥυΦφΧχΨψΩω ΆάΈέΉήΊίΪϊΐΌόΫϋΎύΰΏώ',
     'АаБбВвГгДдЕеЖжЗзИиЙйКкЛлМмНнОоПпРрСсТтУуФфХхЦцЧчШшЩщЪъЫыЬьЭэЮюЯя',
-    'ЁёЂђҐґЃѓЄєЅѕІіЇїЈјЉљЊњЋћЌќЎўЏџӘәҖҗҢңӨөҮүҺһ',
-    '–—―‘’‚“”„†‡•…‰‹›⁄₫€№™Ω∂∆∏∑√∞∫≈≠≤≥◊\uF8FFﬁﬂ≡₣₤₧℅ℓ℮∩∟',
-    'ˆ ˇ ˘ ˙ ˚ ˛ ˜ ˝ ̀ ́ ̃ ̉ ̣ ΄ ΅ ·',
-    '⌠☼♀♂♠♣♥♦♪♫‗ⁿ∕∙⌐▀▄ ▌▐░░▒▒▓▓██ ╔╦╗┌┬┐╒╤╕╓╥╖  ╔╦╗┌┬┐╒╤╕╓╥╖  ╠╬╣├┼┤╞╪╡╟╫╢',
-    '⌡   ■□▪▫▬▲►▼◄○●◘◙◦☺☻░░▒▒▓▓██ ╠╬╣├┼┤╞╪╡╟╫╢║═╚╩╝└┴┘╘╧╛╙╨╜│─╚╩╝└┴┘╘╧╛╙╨╜',
+    'ЁёЂђҐґЃѓЄєЅѕІіЇїЈјЉљЊњЋћЌќЎўЏџӘәҖҗҢңӨөҮүҺһѢѣѲѳѴѵ',
+    '–—―‘’‚“”„†‡•…‰‹›⁄₫€№™Ω∂∆∏∑√∞∫≈≠≤≥◊\uF8FFﬁﬂ½¼¾⅛⅜⅝⅞ⁿº¹²³∕⌐≡₣₤₧℅ℓ℮∩∟‗',
+    '⁰¹²³⁴⁵⁶⁷⁸⁹⁺⁻⁼⁽⁾ⁿ₀₁₂₃₄₅₆₇₈₉₊₋₌₍₎;‾ˉ‽℗ﬀﬁﬂﬃﬄ',
+    'ˆ ˇ ˘ ˙ ˚ ˛ ˜ ˝ ̀ ́ ̃ ̉ ̣ ΄ ΅ ·☺☻♥♦♣♠•◘○◙♂♀♪♫☼►◄↕‼¶§▬↨↑↓→←∟↔▲▼',
+    '⌠□▫○◦▐ ▌▀░░▒▒▓▓██ ╔╦╗┌┬┐╒╤╕╓╥╖  ╔╦╗┌┬┐╒╤╕╓╥╖  ╠╬╣├┼┤╞╪╡╟╫╢',
+    '⌡■▪●•∙·▬▄░░▒▒▓▓██ ╠╬╣├┼┤╞╪╡╟╫╢║═╚╩╝└┴┘╘╧╛╙╨╜│─╚╩╝└┴┘╘╧╛╙╨╜',
     '"Neutral", \'Neutral\', “English”, ‘English’, „German“, ‚German‘, «French», ‹French›',
     '―――― Em—Dash, En–Dash, z=10-x+y*2π, hy‐phen‐ate, мʼята, ´acute, ˝double, ƒ′, ƒ″',
-    '⇧⌥⌘⊞ ⇦⇧⇨⇩⌃⌄ ¼, ½, ¾″ ÔÖŌÕ ŮÚŰÙ ŠŞŻŽŹ iìíîï',
+    '⇧⌥⌘⊞ ⇦⇧⇨⇩⌃⌄ ¼, ½, ¾″ ÔÖŌÕ ŮÚŰÙ ŠŞŻŽŹ iìíîï ǺǻǽȚțẄẅẀẁ',
     'No ambiguity in the characters ‘Il1’, ‘OoОо0’, ‘CcСс’, ‘EeЕе’, etc.:',
     'Cop Сор, Box Вох, Check Сплеск, Cocoa Сосна',
     'The quick brown fox jumps over the lazy dog',
