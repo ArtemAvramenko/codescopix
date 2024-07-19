@@ -4,7 +4,7 @@
 Codescopix is a a monospace pixel font that includes characters for all major languages in Europe and America. The font covers the classic Windows and OS X encodings, ensuring comprehensive language support and compatibility across various systems. See an example [here](./Example.png).
 
 ## Supported Encodings
-The font covers the Unicode [subset](./Codescopix.png) containing Latin, Greek and Cyrillic characters for different languages:
+The font covers the Unicode [subset](./Codescopix.png) containing Latin, Greek and Cyrillic characters. This includes all characters from the [World Glyph Set](https://en.wikipedia.org/wiki/World_glyph_set) (W1G) and [Windows Glyph List](https://en.wikipedia.org/wiki/Windows_Glyph_List_4) (WGL4) in particular:
 - Roman (win1252, mac10000, mac10079)
 - Greek (win1253, mac10006)
 - Cyrillic (win1251, mac10007, mac10017)
