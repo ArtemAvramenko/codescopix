@@ -52,12 +52,16 @@ function getAsciiImage() {
 function getTableText() {
     let latestGroup = '';
     let latestPos = 0;
+    const groupCols = ['000', '039', '220'];
     const colHeader = 'Code ' + [...Array(16).keys()].map(n => toHex(n, 1)).join(' ') + ' ';
-    const col1 = [colHeader];
-    const col2 = [colHeader];
+    const cols = groupCols.map(() => [colHeader])
     for (let char of chars) {
         let group = toHex(char.code >> 4, 3);
-        const col = group < '100' ? col1 : col2;
+        let i = groupCols.length - 1;
+        while (i > 0 && group < groupCols[i]) {
+            i--;
+        }
+        const col = cols[i];
         if (group != latestGroup) {
             latestGroup = group;
             latestPos = 0;
@@ -70,10 +74,13 @@ function getTableText() {
         col[col.length - 1] += ' ' + ch;
     }
     const res = [];
-    for (let i = 0; i < Math.max(col1.length, col2.length); i++) {
-        const s1 = col1[i] || '';
-        const s2 = col2[i] || '';
-        res.push(s1 + ' '.repeat(40 - s1.length) + s2);
+    const maxRows = Math.max(...cols.map(c => c.length));
+    for (let i = 0; i < maxRows; i++) {
+        const s = cols.map(col => {
+            const row = col[i] || '';
+            return row + ' '.repeat(colHeader.length - row.length);
+        });
+        res.push(s.join('   '));
     }
     return res;
 }
@@ -111,13 +118,13 @@ function getImage(/** @type {string[]} */ textLines) {
 
 writeFileSync('./Codescopix.png', getImage(getTableText()));
 writeFileSync('./Example.png', getImage([
-    'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz',
     '!\"#$%&\'()*+,-./0123456789:;<=>?@[\\]^_`{|}~',
-    '‰¡¢£¤¥¦§¨©ªº«¬\u00AD®¯°±²³´µ¶·¸¹»¼½¾¿',
-    'ÀàÁáÂâÃãÄäÅåÆæÇçÈèÉéÊêËëÌìÍíÎîÏïÐðÑñÒòÓóÔôÕõÖö×÷ØøÙùÚúÛûÜüÝýÞþßÿĀāĂăƠơƯư',
-    'ĄąĆćČčĎďĐđĒēĖėĘęĚěĞğĢģĪīĮįİıĶķĹĺĻļĽľŁłŃńŅņŇňŌōŐőŒœŔŕŖŗŘřŚśŞşŠšŢţŤťŪūŮůŰűŲųŸŹźŻżŽž',
+    '¡¢£¤¥¦§¨©ª«®¯°±²³´µ¶·¸¹º»¼½¾¿‰\u00AD×÷',
+    'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz',
+    'ÀàÁáÂâÃãÄäÅåÆæÇçÈèÉéÊêËëÌìÍíÎîÏïÐðÑñÒòÓóÔôÕõÖöØøÙùÚúÛûÜüÝýÿÞþß',
+    'ĀāĂăĄąĆćĈĉĊċČčĎďĐđĒēĔĕĖėĘęĚěĜĝĞğĠġĢģĤĥĦħĨĩĪīĬĭĮįİıĲĳĴĵĶķĸĹĺĻļĽľĿ',
+    'ŀŁłŃńŅņŇňŉŊŋŌōŎŏŐőŒœŔŕŖŗŘřŚśŜŝŞşŠšŢţŤťŦŧŨũŪūŬŭŮůŰűŲųŴŵŶŷŸŹźŻżŽžſ',
     'ΑαΒβΓγΔδΕεΖζΗηΘθΙιΚκΛλΜμΝνΞξΟοΠπΡρΣσςΤτΥυΦφΧχΨψΩωΆάΈέΉήΊίΪϊΐΌόΫϋΎύΰΏώ',
-    // TODO: Windows Glyph List 4 (WGL4), World Glyph Set (W1G)
     'АаБбВвГгДдЕеЖжЗзИиЙйКкЛлМмНнОоПпРрСсТтУуФфХхЦцЧчШшЩщЪъЫыЬьЭэЮюЯя',
     'ЁёЂђҐґЃѓЄєЅѕІіЇїЈјЉљЊњЋћЌќЎўЏџӘәҖҗҢңӨөҮүҺһѢѣѲѳѴѵ',
     '–—―‘’‚“”„†‡•…‰‹›⁄₫€№™Ω∂∆∏∑√∞∫≈≠≤≥◊\uF8FFﬁﬂ½¼¾⅛⅜⅝⅞∕⌐≡₣₤₧℅ℓ℮∩∟‗',
