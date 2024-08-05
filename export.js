@@ -5,6 +5,7 @@ import Jimp from 'jimp';
 const chWidth = 8;
 const chHeight = 19;
 const chCapsHeight = 11;
+const chMaxDiacriticHeight = 6;
 
 const chars = kbitxParse('./Codescopix.kbitx');
 const infoByCharCode = Object.fromEntries(chars.map(ch => [ch.code, ch]));
@@ -102,6 +103,10 @@ function getImage(/** @type {string[]} */ textLines) {
                 const chImg = bitmapByChar[ch];
                 if (chImg) {
                     const charY = infoByCharCode[ch.charCodeAt(0)].y;
+                    const charHeight = infoByCharCode[ch.charCodeAt(0)].rows.length;
+                    if (charHeight > chMaxDiacriticHeight) {
+                        offset = 0;
+                    }
                     img.blit(chImg, x * chWidth, y * chHeight + (isDiacritics && charY > 0 ? offset : 0));
                     if (!isDiacritics) {
                         offset = Math.max(0, chCapsHeight - charY - 1);
@@ -127,15 +132,14 @@ writeFileSync('./Example.png', getImage([
     'ΑαΒβΓγΔδΕεΖζΗηΘθΙιΚκΛλΜμΝνΞξΟοΠπΡρΣσςΤτΥυΦφΧχΨψΩωΆάΈέΉήΊίΪϊΐΌόΫϋΎύΰΏώ',
     'АаБбВвГгДдЕеЖжЗзИиЙйКкЛлМмНнОоПпРрСсТтУуФфХхЦцЧчШшЩщЪъЫыЬьЭэЮюЯя',
     'ЁёЂђҐґЃѓЄєЅѕІіЇїЈјЉљЊњЋћЌќЎўЏџӘәҖҗҢңӨөҮүҺһѢѣѲѳѴѵ',
-    '–—―‘’‚“”„†‡•…‰‹›⁄₫€№™Ω∂∆∏∑√∞∫∬∭≈≉≠≤≥◊\uF8FFﬁﬂ½¼¾⅛⅜⅝⅞∕⌐¬≡₣₤₧℅ℓ℮∩∟‗⌀∈∉∼∽',
-    '⁰¹²³⁴⁵⁶⁷⁸⁹⁺⁻⁼⁽⁾ⁿ₀₁₂₃₄₅₆₇₈₉₊₋₌₍₎;‾ˉ‽℗ﬀﬁﬂﬃﬄǺǻǼǽǾǿȘșȚțẄẅẀẁẂẃẄẅỲỳẞϖℵℑℜ℘ϑϕ∝∇−',
-    '☹☺☻♥♦♣♠•◘○◙♂♀♪♫☼►◄↕‼¶§▬↨↑↓→←∟↔▲▼⌂$£¥₡₦₩₪₫€₭₮₱₲₴₵₸₹₺₼₽₾₿₠₢₥₨₯₰₳₶₷₻',
-    '▂▚▆▎▊▘▗▀▄▝▖▞║│═─◢◣◢╭─╮╔╦╗┌┬┐╒╤╕╓╥╖⎡⎧⎛ ⎞⎫⎤⌠⎧╲N╱',
-    '⌠⎲□▫○◦▐ ▌▛▜ ░░▒▒◥◤◥├─┤╠╬╣├┼┤╞╪╡╟╫╢⎢⎨⎜ ⎟⎬⎥⎮⎪W╳E',
-    '⌡⎳■▪●•∙·▬▙▟ ▓▓██◢◣◢╰─╯╚╩╝└┴┘╘╧╛╙╨╜⎣⎩⎝ ⎠⎭⎦⌡⎨╱S╲',
-    //TODO: '▔▁▏▕▍▃✓✔✕✖⚠ℹ ⇞⇟🡤🡦⤴⤵⎀⎋␣⌫⌦⇥↩',
-    //TODO: Mac OS Symbol/Font X
-    //'∠⊗⊕∅⏐⎯↵ϒ⊥∴⎷√⌟≃⎼␤⋅∪⊃⊂∧∨⇔⇐⇑⇒⇓⊇⊄⊆⟨⟩',
+    '–—―‘’‚“”„†‡•…‰‹›⁄₫€№™Ω∂∆∏∑√∞∫∬∭≈≉≃≅≠≤≥◊\uF8FFﬁﬂ½¼¾⅛⅜⅝⅞∕⌐¬≡₣₤₧℅ℓ℮∪∩∟‗⌀∈∉∼∽',
+    '⁰¹²³⁴⁵⁶⁷⁸⁹ⁱ⁺⁻⁼⁽⁾ⁿ₀₁₂₃₄₅₆₇₈₉ᵢ₊₋₌₍₎;‾ˉ‽℗ﬀﬁﬂﬃﬄǺǻǼǽǾǿȘșȚțẄẅẀẁẂẃẄẅỲỳẞϖℵℑℜ℘ϑϕ∝∇−',
+    '☹☺☻♥♦♣♠•◘○◙♂♀♪♫☼►◄↕‼¶§▬↨↑↓→←∟↔▲▼⌂⇕⇑⇓⇒⇐⇔$£¥₡₦₩₪₫€₭₮₱₲₴₵₸₹₺₼₽₾₿₠₢₥₨₯₰₳₶₷₻',
+    '⏐⎯▂▚▆▎▊▘▗▀▄▝▖║│═─◢◣◢╭─╮╔╦╗┌┬┐╒╤╕╓╥╖⎡⎧⎛ ⎞⎫⎤⌠⎧╲N╱⎲──⌝  ⎲─⌝⌫∠⌦⊗⊕∅⊂⊃⊄⊅⊆⊇√∛⟨ƒ⟩a⎺⎻⎼⎽',
+    '⌠│□▫○◦▐▬▌▛▜▞ ░░▒▒◥◤◥├─┤╠╬╣├┼┤╞╪╡╟╫╢⎢⎨⎜ ⎟⎬⎥⎮⎪W╳E⎲╲ ┌── ⟩ ',
+    '⌡⎷■▪●•∙··⋅◆▙▟▓▓██◢◣◢╰─╯╚╩╝└┴┘╘╧╛╙╨╜⎣⎩⎝ ⎠⎭⎦⌡⎨╱S╲⎳ ⟩⎷aᵢ⎳─⌟',
+    //TODO: '▔▁▏▕▍▃✓✔✕✖⚠ℹ ⇞⇟🡤🡦⤴⤵⎀⎋␣⇥↩',
+    //TODO: '↵ϒ∴∧∨∀∃∍' Mac OS Symbol/Font X/DEC Technical (TCS)
     '"Neutral", \'Neutral\', “English”, ‘English’, „German“, ‚German‘, «French», ‹French›',
     '―――― Em—Dash, En–Dash, z₁=10-x+y²*2π, hy‐phen‐ate, мʼята, oʻzbek, ´acute, ˝double',
     '⇧⌥⌘⊞ ⇦⇧⇨⇩⌃⌄ ƒ′, ƒ″, ¼, ½, ¾″ ‴ ÔÖŌÕ ŮÚŰÙ ŠŞŻŽŹ iìíîï ˆ ˇ ˘ ˙ ˚ ˛ ˜ ‛˝ ̀ ́ ̃ ̉ ̣ ΄ ΅ ·',
