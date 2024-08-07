@@ -11,6 +11,7 @@ The font covers the Unicode [subset](./Codescopix.png) containing Latin, Greek a
 - Central European (win1250, win1257, mac10029, mac10010, mac10082)
 - Turkish (win1254, mac10081)
 - Vietnamese (win1258)
+- Mac OS Symbol/Font X/DEC Technical Character Sets
 
 ## Features
 - **Comprehensive Character Coverage**: Supports Roman, Cyrillic, Central European, Turkish, and Vietnamese characters.
