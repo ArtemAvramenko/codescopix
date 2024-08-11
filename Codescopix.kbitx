@@ -11,9 +11,9 @@
 <name id="0" value="Copyright (c) 2024, Artem Avramenko"/>
 <name id="1" value="Codescopix"/>
 <name id="2" value="Regular"/>
-<name id="3" value="Codescopix-01-04"/>
+<name id="3" value="Codescopix-01-05"/>
 <name id="4" value="Codescopix"/>
-<name id="5" value="Version 1.4"/>
+<name id="5" value="Version 1.5"/>
 <name id="6" value="Codescopix"/>
 <name id="8" value="Made with Bits&#39;n&#39;Picas by Kreative Software"/>
 <name id="11" value="http://www.kreativekorp.com/software/bitsnpicas/"/>
@@ -517,13 +517,14 @@
 <g u="8616" x="2" y="9" w="8" d="CgUCQQNDxgD/AP8A/wJBBEECxv8A/wD/AEMDQQdF"/>
 <g u="8617" x="1" y="10" w="8" d="CgcEQQdBB0EGQQZBAkEDw/8A/wPC/wBFA0EHQQQ"/>
 <g u="8629" x="1" y="8" w="8" d="CAYFQQVBBUECQQLD/wD/A0fCAP8GQQM"/>
-<g u="8655" x="0" y="0" w="0" d="AAA"/>
 <g u="8656" x="1" y="7" w="8" d="BQcCQQVHB0YCQQQ"/>
 <g u="8657" x="2" y="9" w="8" d="CAUCQQPE/wD/AEIBQsQA/wD/AsP/AP8Cw/8A/wLD/wD/AsT/AP8A"/>
 <g u="8658" x="1" y="7" w="8" d="BQcEQQJGBkgFQQI"/>
 <g u="8659" x="2" y="9" w="8" d="CAXEAP8A/wLD/wD/AsP/AP8Cw/8A/wLE/wD/AEIBQsQA/wD/A0EC"/>
 <g u="8660" x="1" y="7" w="8" d="BQcCw/8A/wNFwgD/BcL/AEUDw/8A/wI"/>
 <g u="8661" x="2" y="9" w="8" d="CAUCQQPE/wD/AEIBQsQA/wD/AsT/AP8AQgFCxAD/AP8DQQI"/>
+<g u="8670" x="2" y="9" w="8" d="CQUCQQNDxgD/AP8A/wJBAkUCQQJFAkEEQQI"/>
+<g u="8671" x="2" y="9" w="8" d="CQUCQQRBAkUCQQJFAkECxv8A/wD/AEMDQQI"/>
 <g u="8677" x="1" y="7" w="8" d="BQcDQQJBBML/AEgEw/8A/wNBAkE"/>
 <g u="8678" x="1" y="9" w="8" d="CQcEQQVCBMP/AP8DQQJEBcP/AP8CQwLD/wD/BUIGQQI"/>
 <g u="8679" x="1" y="9" w="8" d="CQcDQQXD/wD/A0EDw/8A/wVEAUMCw/8A/wTD/wD/BMP/AP8EQwI"/>
@@ -594,6 +595,7 @@
 <g u="8998" x="0" y="8" w="8" d="BwhFA0EDQgJCwgD/AsX/AP8A/wRDwgD/AsP/AP8DQgJFAw"/>
 <g u="9003" x="0" y="8" w="8" d="BwgDRQLC+f8Dw/kA+QLD/wD/gvkExf8A+QD5AsT/AP/5AsL5/wNBA0U"/>
 <g u="9088" x="1" y="10" w="8" d="CgcDQQdBBUIEw/8A/wVCCUEFw/8A/wNBA8P/AP8FQQM"/>
+<g u="9099" x="1" y="9" w="8" d="CAdDwgD/AkIDxf8A/wD/A0EDQQJCA8L/AEIFw/8A/wNBA0MC"/>
 <g u="9115" x="4" y="8" w="8" d="CwQDQQJBA0EDQQJBA0EDQQNBAkEDQQNBAw"/>
 <g u="9116" x="4" y="16" w="8" d="EwFT"/>
 <g u="9117" x="4" y="16" w="8" d="CwRBA0EDQQRBA0EDQQNBBEEDQQNBBEE"/>
@@ -732,8 +734,14 @@
 <g u="9834" x="1" y="11" w="8" d="CwYDQQVCBMP/AP8DQQVBBUEFQQVBA0MCRANCAw"/>
 <g u="9835" x="0" y="11" w="8" d="CwgDQQdDBUECQgNBA0EDQQNBA0EDwv8AQwNFA8L/AEICQwREBUIB"/>
 <g u="9888" x="1" y="9" w="8" d="CAcDQQZBBcP/AP8Ew/8A/wNCAUICRQFDAUo"/>
+<g u="10003" x="1" y="11" w="8" d="CwYFQQVBBUEEQQXD/wD/A8P/AP8CQQPD/wD/A8P/AP8EQQVBAw"/>
+<g u="10004" x="1" y="12" w="8" d="DAcGQQZBBUIFQgVDBEQCQgJBAkICQgFCA8L/AEIDQwVCAg"/>
+<g u="10005" x="1" y="7" w="8" d="BgZBBMP/AP8CQQNCBEIDQQLD/wD/BEE"/>
+<g u="10006" x="1" y="7" w="8" d="BgdCA0IBQgFCA0MEQwNCAUIBQgNC"/>
 <g u="10216" x="3" y="16" w="8" d="EwUEQQRBA0EEQQNBBEEDQQRBA0EEQQRBBUEEQQVBBEEFQQRBBUEEQQ"/>
 <g u="10217" x="0" y="16" w="8" d="EwVBBEEFQQRBBUEEQQVBBEEFQQRBBEEDQQRBA0EEQQNBBEEDQQRBBA"/>
+<g u="10548" x="1" y="10" w="8" d="CQcEQQVDA8X/AP8A/wRBBkEGQQZBBUEDQwQ"/>
+<g u="10549" x="1" y="10" w="8" d="CQdDB0EHQQZBBkEGQQTF/wD/AP8DQwVBAg"/>
 <g u="61441" x="1" y="11" w="8" d="CwYCQgNBBUEFQQRFAkECQQJBAkECQQJBAkECQQJBAkECwv8AQw"/>
 <g u="61442" x="1" y="11" w="8" d="CwYCQwJBAkECQQJBAkECwv8AQ8IA/wJBAkECQQJBAkECQQJBAkECQQJBAkEDQQ"/>
 <g u="63743" x="1" y="10" w="8" d="CgcEQQVCBUEERQFNAUUCRQNFA8P/AP8C"/>
