@@ -53,7 +53,7 @@ function getAsciiImage() {
 function getTableText() {
     let latestGroup = '';
     let latestPos = 0;
-    const groupCols = ['000', '040', '220'];
+    const groupCols = ['000', '040', '223'];
     const colHeader = 'Code ' + [...Array(16).keys()].map(n => toHex(n, 1)).join(' ') + ' ';
     const cols = groupCols.map(() => [colHeader])
     for (let char of chars) {
