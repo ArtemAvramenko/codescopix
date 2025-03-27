@@ -6,6 +6,7 @@ const chWidth = 8;
 const chHeight = 19;
 const chCapsHeight = 11;
 const chMaxDiacriticHeight = 6;
+const chSecondDiacriticsOffset = 4;
 
 const chars = kbitxParse('./Codescopix.kbitx');
 const infoByCharCode = Object.fromEntries(chars.map(ch => [ch.code, ch]));
@@ -53,7 +54,7 @@ function getAsciiImage() {
 function getTableText() {
     let latestGroup = '';
     let latestPos = 0;
-    const groupCols = ['000', '040', '223'];
+    const groupCols = ['000', '040', '225'];
     const colHeader = 'Code ' + [...Array(16).keys()].map(n => toHex(n, 1)).join(' ') + ' ';
     const cols = groupCols.map(() => [colHeader])
     for (let char of chars) {
@@ -111,7 +112,7 @@ function getImage(/** @type {string[]} */ textLines) {
                     if (!isDiacritics) {
                         offset = Math.max(0, chCapsHeight - charY - 1);
                     } else {
-                        offset -= 4; // second diacritics
+                        offset -= chSecondDiacriticsOffset; // second diacritics
                     }
                 }
                 isDiacritics = true;
@@ -129,7 +130,7 @@ writeFileSync('./Example.png', getImage([
     'ÀàÁáÂâÃãÄäÅåÆæÇçÈèÉéÊêËëÌìÍíÎîÏïÐðÑñÒòÓóÔôÕõÖöØøƠơÙùÚúÛûÜüƯưÝýÿÞþß',
     'ĀāĂăĄąĆćĈĉĊċČčĎďĐđĒēĔĕĖėĘęĚěĜĝĞğĠġĢģĤĥĦħĨĩĪīĬĭĮįİıĲĳĴĵĶķĸĹĺĻļĽľĿ',
     'ŀŁłŃńŅņŇňŉŊŋŌōŎŏŐőŒœŔŕŖŗŘřŚśŜŝŞşŠšŢţŤťŦŧŨũŪūŬŭŮůŰűŲųŴŵŶŷŸŹźŻżŽžſ',
-    'ΑαΒβΓγΔδΕεΖζΗηΘθΙιΚκΛλΜμΝνΞξΟοΠπΡρΣσςΤτΥυΦφΧχΨψΩωΆάΈέΉήΊίΪϊΐΌόΫϋΎύΰΏώ',
+    'ΑαΒβΓγΔδΕεΖζΗηΘθΙιΚκΛλΜμΝνΞξΟοΠπΡρΣσςΤτΥυΦφΧχΨψΩωΆάΈέΉήΊίΪϊΐΌόΫϋΎύΰΏώᾳἀ',
     'АаБбВвГгДдЕеЖжЗзИиЙйКкЛлМмНнОоПпРрСсТтУуФфХхЦцЧчШшЩщЪъЫыЬьЭэЮюЯя',
     'ЁёЂђҐґЃѓЄєЅѕІіЇїЈјЉљЊњЋћЌќЎўЏџӘәҖҗҢңӨөҮүҺһѢѣѲѳѴѵ',
     '–—―‘’‚“”„†‡•…‰‹›⁄₫€№™Ω∂∆∏∑√∞∫∬∭≈≉≃≅≠≤≥◊\uF8FFﬁﬂ½¼¾⅛⅜⅝⅞∕⌐¬≡₣₤₧℅ℓ℮∟‗⌀∈∉∼∽',
@@ -142,7 +143,7 @@ writeFileSync('./Example.png', getImage([
     '―――― Em—Dash, En–Dash, z₁=10-x+y²*2π, hy‐phen‐ate, мʼята, oʻzbek, ´acute, ˝double',
     '⇧⌥⌘⊞ ⇦⇧⇨⇩⌃⌄ ƒ′, ƒ″, ¼, ½, ¾″ ‴ ÔÖŌÕ ŮÚŰÙ ŠŞŻŽŹ iìíîï ˆ ˇ ˘ ˙ ˚ ˛ ˜ ‛˝ ̀ ́ ̃ ̉ ̣ ΄ ΅ ·',
     'No ambiguity in the characters ‘Il1’, ‘OoОо0’, ‘CcСс’, ‘EeЕе’, etc.:',
-    'Cop Сор, Box Вох, Check Сплеск, Cocoa Сосна',
+    'Cop Сор, Box Вох, Check Сплеск, Cocoa Сосна, TAME IO ΤΑΜΕΊΟ',
     'The quick brown fox jumps over the lazy dog',
     '"Üb jodeln, Gör!", quäkt Schwyz',
     'Pijamalı hasta yağız şoföire çabucak güvendi',
@@ -150,6 +151,7 @@ writeFileSync('./Example.png', getImage([
     'La cigüeña tocaba el saxofón detrás del palenque de paja.',
     'Voix ambiguë d’un cœur qui au zéphyr préfère les jattes de kiwis.',
     'Árvíztűrő tükörfúrógép',
+    'Γαζίες καὶ μυρτιὲς δὲν θὰ βρῶπιὰ στὸ χρυσαφὶ ξέφωτο. Είναι αυτό μέρος της ψυχῆς· ή όχι;',
     'Съешь же ещё этих мягких французских булок, да выпей чаю',
     'Вкъщи не яж сьомга с фиде без ракийка и хапка люта чушчица!',
     'У рудога вераб’я ў сховішчы пад фатэлем ляжаць нейкія гаючыя зёлкі',

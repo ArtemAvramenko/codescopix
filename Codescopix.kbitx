@@ -8,12 +8,12 @@
 <prop id="lineGap" value="2"/>
 <prop id="xHeight" value="15"/>
 <prop id="capHeight" value="11"/>
-<name id="0" value="Copyright (c) 2024, Artem Avramenko"/>
+<name id="0" value="Copyright (c) 2025, Artem Avramenko"/>
 <name id="1" value="Codescopix"/>
 <name id="2" value="Regular"/>
-<name id="3" value="Codescopix-01-05"/>
+<name id="3" value="Codescopix-01-06"/>
 <name id="4" value="Codescopix"/>
-<name id="5" value="Version 1.5"/>
+<name id="5" value="Version 1.6"/>
 <name id="6" value="Codescopix"/>
 <name id="8" value="Made with Bits&#39;n&#39;Picas by Kreative Software"/>
 <name id="11" value="http://www.kreativekorp.com/software/bitsnpicas/"/>
@@ -221,13 +221,17 @@
 <g u="778" x="2" y="15" w="8" d="AwQBQsIA/wLC/wBCAQ"/>
 <g u="779" x="2" y="14" w="8" d="AgTDAP8AQsMA/wA"/>
 <g u="780" x="2" y="14" w="8" d="AgRBAsL/AEIB"/>
+<g u="787" x="3" y="14" w="8" d="AwLDAP8AQgE"/>
 <g u="795" x="5" y="14" w="8" d="AwLDAP8AQgE"/>
 <g u="803" x="3" y="-1" w="8" d="AgJE"/>
 <g u="806" x="3" y="-1" w="8" d="AgIBQgE"/>
 <g u="807" x="2" y="0" w="8" d="AwQCQQREAQ"/>
 <g u="808" x="3" y="0" w="8" d="AwIBQgJB"/>
 <g u="824" x="2" y="10" w="8" d="CAQDQQNBAkEDQQJBA0ECQQNBAw"/>
+<g u="834" x="2" y="14" w="8" d="AgRCAUIBQg"/>
+<g u="835" x="3" y="14" w="8" d="AwLDAP8AQgE"/>
 <g u="836" x="1" y="14" w="8" d="AgYDQQLD/wD/AkE"/>
+<g u="837" x="3" y="-1" w="8" d="AgLC/wBC"/>
 <g u="894" x="3" y="6" w="8" d="CQMBQgFCCkICQQJDAQ"/>
 <g u="900" x="3" y="14" w="8" d="AwJFAQ"/>
 <g u="901" x="1" y="14" w="8" d="AgYDQQLD/wD/AkE"/>
@@ -235,7 +239,7 @@
 <g u="903" x="3" y="8" w="8" d="AgJE"/>
 <g u="904" x="0" y="11" w="8" d="CwjC/wBHAkEDQQNBB0EHQQdEBEEHQQdBB0EHRQ"/>
 <g u="905" x="0" y="11" w="8" d="CwjC/wBCA0ICQQNBA0EDQQNBA0EDQQNBA0UDQQNBA0EDQQNBA0EDQQNBA0EDQQ"/>
-<g u="906" x="2" y="11" w="8" d="CwVBA0ICQgLD/wD/BEEEQQRBBEEEQQRBBEECQgE"/>
+<g u="906" x="1" y="11" w="8" d="CwVBA0ICQgLD/wD/BEEEQQRBBEEEQQRBBEECQgE"/>
 <g u="908" x="0" y="11" w="8" d="CwhBA0ICQQJBAkEDQQRBAkEEQQJBBEECQQRBAkEEQQJBBEECQQRBA0ECQQVCAg"/>
 <g u="910" x="1" y="11" w="8" d="CwfD/wD/A0LCAP8DQQJBA0EDw/8A/wTD/wD/BMP/AP8FQQZBBkEGQQVDAQ"/>
 <g u="911" x="0" y="11" w="8" d="CwhBAkMCw/8A/wNBA0EDQQJBBcP/AP8Fw/8A/wXD/wD/BcP/AP8FQQJBA0EDQQNBAkIDQg"/>
